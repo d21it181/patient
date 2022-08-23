@@ -1,0 +1,5 @@
+com/example/demo/DemoApplication.class
+com/example/demo/errors/InvalidRequestException.class
+com/example/demo/model/PatientRecord.class
+com/example/demo/repository/PatientRecordRepository.class
+com/example/demo/controller/PatientRecordController.class
