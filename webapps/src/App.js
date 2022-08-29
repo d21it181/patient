@@ -12,6 +12,16 @@ import NavigationBar from "./components/NavigationBar";
 function App() {
   const [alert, setAlert] = useState(null);
 
+  useEffect(() => {
+    axios.get("https://spring-run.d21it181.repl.co/")
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => alert(error));
+
+  }, []);
+
+
   let showAlert = (type, message) => {
     setAlert({
       type: type,

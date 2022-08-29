@@ -1,6 +1,9 @@
 { pkgs }: {
 	deps = [
-		pkgs.jre_minimal
+		pkgs.openssh_with_kerberos
+  pkgs.openssh_with_kerberos
+  pkgs.docker_compose
+  pkgs.jre_minimal
   pkgs.zulu
   pkgs.maven
   pkgs.nodejs-16_x

@@ -11,6 +11,8 @@ export default function PatientList(props) {
   const [loading, setLoading] = useState(false);
   const [patients, setPatients] = useState([]);
 
+  const [editFlag, setEditFlag] = useState();
+
   useEffect(() => {
     getPatients();
   }, []);
@@ -20,9 +22,13 @@ export default function PatientList(props) {
   let getPatients = () => {
     setLoading(true);
     axios
-      .get("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us62.gitpod.io/listPatient")
+      .get("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us63.gitpod.io/listPatient")
       .then((response) => {
         setPatients(response.data);
+
+
+        setEditFlag(Array(response.data.length).fill(false))
+
         setLoading(false);
       })
       .catch((error) => alert(error));
@@ -31,7 +37,7 @@ export default function PatientList(props) {
 
   let deletePatient = (patientId) => {
     setLoading(true);
-    axios.delete("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us62.gitpod.io/patient/" + patientId)
+    axios.delete("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us63.gitpod.io/patient/" + patientId)
       .then(response => {
         if (response.data !== null) {
           setLoading(false)
@@ -43,18 +49,31 @@ export default function PatientList(props) {
   }
 
   let updatePatient = (index) => {
+
+    if (editFlag[index]) {
+      setLoading(true);
+      axios.put("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us63.gitpod.io/patient/" + patients[index].patientId, patients[index])
+        .then(response => {
+          if (response.data !== null) {
+            setLoading(false)
+            props.showAlert("success", "Record updated successfully");
+            //alert("Record deleted successfully")
+            setPatients(response.data);
+          }
+        })
+    }
+
+
+    let newArr = [...editFlag];
+    newArr[index] = (!newArr[index]);
+    setEditFlag(newArr)
+
+
+
+
     //console.log(patients[index])
 
-    setLoading(true);
-    axios.put("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us62.gitpod.io/patient/" + patients[index].patientId, patients[index])
-      .then(response => {
-        if (response.data !== null) {
-          setLoading(false)
-          props.showAlert("success", "Record updated successfully");
-          //alert("Record deleted successfully")
-          setPatients(response.data);
-        }
-      })
+
   }
 
   let textChanged = (index, event) => {
@@ -110,13 +129,13 @@ export default function PatientList(props) {
                   <tr key={patient.patientId}>
 
                     <td>{patient.patientId}</td>
-                    <td><Form.Control name="name" type="text" value={patients[index].name} onChange={(e) => textChanged(index, e)} /></td>
-                    <td><Form.Control name="age" type="text" value={patients[index].age} onChange={(e) => textChanged(index, e)} /></td>
-                    <td><Form.Control name="address" type="text" value={patients[index].address} onChange={(e) => textChanged(index, e)} /></td>
+                    <td>{editFlag[index] ? (<Form.Control name="name" type="text" value={patients[index].name} onChange={(e) => textChanged(index, e)} />) : (patients[index].name)}</td>
+                    <td>{editFlag[index] ? (<Form.Control name="age" type="text" value={patients[index].age} onChange={(e) => textChanged(index, e)} />) : (patients[index].age)}</td>
+                    <td>{editFlag[index] ? (<Form.Control name="address" type="text" value={patients[index].address} onChange={(e) => textChanged(index, e)} />) : (patients[index].address)}</td>
                     <td>
 
                       <ButtonGroup>
-                        <Button size="sm" variant="outline-primary" onClick={updatePatient.bind(this, index)}><div> Edit </div></Button>
+                        <Button size="sm" variant="outline-primary" onClick={updatePatient.bind(this, index)}><div> {editFlag[index] ? ("Save") : ("Edit")} </div></Button>
                         <Button size="sm" variant="outline-danger" onClick={deletePatient.bind(this, patient.patientId)}><div> Delete </div></Button>
                         {/* <Button size="sm" variant="outline-danger" onClick={()=>deleteStudent(student.id)}><FontAwesomeIcon icon={faTrash}> Delete </FontAwesomeIcon></Button> */}
                       </ButtonGroup>
