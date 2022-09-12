@@ -65,13 +65,16 @@ export default function PatientList(props) {
             setPatients(response.data);
           }
         })
- 
-       }
+   }
 
 
     let newArr = [...editFlag];
     newArr[index] = !newArr[index];
-    setEditFlag(newArr)
+    setEditFlag(ne
+
+
+
+    Arr)
 
 
 
