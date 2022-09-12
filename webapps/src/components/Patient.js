@@ -30,7 +30,7 @@ export default function Student(props) {
     if (pId != null) {
       setLoading(true);
       axios
-        .get("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us63.gitpod.io/patient/" + pId)
+        .get("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us64.gitpod.io/patient/" + pId)
         .then((response) => {
           setPatientId(response.data.patientId)
           setName(response.data.name)
@@ -67,7 +67,7 @@ export default function Student(props) {
 
     setLoading(true);
 
-    axios.post("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us63.gitpod.io/patient", patient)
+    axios.post("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us64.gitpod.io/patient", patient)
       .then(response => {
         if (response.data != null) {
           setLoading(false)
@@ -80,7 +80,7 @@ export default function Student(props) {
   let updatePatient = (event) => {
     event.preventDefault();
     setLoading(true);
-    axios.put("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us63.gitpod.io/patient/" + patientId, patient).then((response) => {
+    axios.put("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us64.gitpod.io/patient/" + patientId, patient).then((response) => {
       if (response.data != null) {
         setLoading(false);
         props.showAlert("success", "Record updated successfully");

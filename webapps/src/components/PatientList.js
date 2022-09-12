@@ -22,7 +22,7 @@ export default function PatientList(props) {
   let getPatients = () => {
     setLoading(true);
     axios
-      .get("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us63.gitpod.io/listPatient")
+      .get("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us64.gitpod.io/listPatient")
       .then((response) => {
         setPatients(response.data);
 
@@ -37,7 +37,7 @@ export default function PatientList(props) {
 
   let deletePatient = (patientId) => {
     setLoading(true);
-    axios.delete("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us63.gitpod.io/patient/" + patientId)
+    axios.delete("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us64.gitpod.io/patient/" + patientId)
       .then(response => {
         if (response.data !== null) {
           setLoading(false)
@@ -52,7 +52,7 @@ export default function PatientList(props) {
 
     if (editFlag[index]) {
       setLoading(true);
-      axios.put("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us63.gitpod.io/patient/" + patients[index].patientId, patients[index])
+      axios.put("https://8080-mayurhere-patient-vxkyz1w2z2e.ws-us64.gitpod.io/patient/" + patients[index].patientId, patients[index])
         .then(response => {
           if (response.data !== null) {
             setLoading(false)
@@ -65,7 +65,7 @@ export default function PatientList(props) {
 
 
     let newArr = [...editFlag];
-    newArr[index] = (!newArr[index]);
+    newArr[index] = !newArr[index];
     setEditFlag(newArr)
 
 
