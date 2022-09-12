@@ -34,7 +34,8 @@ export default function PatientList(props) {
         setLoading(false);
       })
       .catch((error) => alert(error));
-  };
+  }
+  ;
 
 
   let deletePatient = (patientId) => {
@@ -47,7 +48,8 @@ export default function PatientList(props) {
           //alert("Record deleted successfully")
           setPatients(patients.filter(student => student.patientId !== patientId));
         }
-      })
+      }
+  )
   }
 
   let updatePatient = (index) => {
@@ -63,7 +65,8 @@ export default function PatientList(props) {
             setPatients(response.data);
           }
         })
-    }
+ 
+       }
 
 
     let newArr = [...editFlag];
