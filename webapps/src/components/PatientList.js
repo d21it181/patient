@@ -97,7 +97,8 @@ export default function PatientList(props) {
     else if (event.target.name === "address") {
       let newArr = [...patients];
       newArr[index].address = event.target.value;
-      setPatients(newArr)
+      setPatients(newA
+  rr)
     }
   }
 
