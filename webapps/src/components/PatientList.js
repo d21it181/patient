@@ -46,7 +46,8 @@ export default function PatientList(props) {
           //alert("Record deleted successfully")
           setPatients(patients.filter(student => student.patientId !== patientId));
         }
-      }
+     
+   }
       )
   }
 
