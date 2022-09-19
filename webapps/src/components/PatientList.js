@@ -31,7 +31,7 @@ export default function PatientList(props) {
 
         setLoading(false);
       })
-      .catch((error) => alert(error));
+      .catch((error) => alert(e);
   }
     ;
 
