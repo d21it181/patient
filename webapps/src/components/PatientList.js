@@ -47,6 +47,7 @@ export default function PatientList(props) {
           setPatients(patients.filter(student => student.patientId !== patientId));
         }
      
+  
    }
       )
   }
